@@ -17,26 +17,27 @@ Proyek ini merupakan tugas akhir mata kuliah Fundamental Data Science yang terdi
 
 ```
 PROJECT/
+├── Dataset/
+│   └── FuelConsumption.csv                       # Dataset utama yang digunakan kedua studi kasus
 ├── sk1-supervised learning/
-│   ├── myenv/                                    # Virtual environment (tidak perlu di-commit)
 │   ├── app.py                                    # Aplikasi Gradio untuk demo model prediksi
 │   ├── fuel_consumption_prediction_model.pkl     # Model hasil training (model, preprocessor, nama fitur)
 │   ├── FuelConsumptionSupervised.ipynb           # Notebook analisis dan pemodelan regresi
 │   └── requirements.txt                          # Daftar library yang dibutuhkan
-└── sk2-unsupervised learning/
-    ├── venv/                                     # Virtual environment (tidak perlu di-commit)
-    └── FuelConsumptionUnsupervised.ipynb         # Notebook analisis clustering (K-Means)
+├── sk2-unsupervised learning/
+│   └── FuelConsumptionUnsupervised.ipynb         # Notebook analisis clustering (K-Means)
+└── README.md
 ```
 
 | File / Folder | Deskripsi |
 |---|---|
+| `Dataset/FuelConsumption.csv` | Dataset utama konsumsi bahan bakar kendaraan yang digunakan pada kedua studi kasus |
 | `sk1-supervised learning/FuelConsumptionSupervised.ipynb` | Notebook analisis dan pemodelan regresi (Linear Regression dan Random Forest Regressor) |
 | `sk1-supervised learning/app.py` | Aplikasi Gradio untuk mendemonstrasikan model prediksi konsumsi bahan bakar |
 | `sk1-supervised learning/fuel_consumption_prediction_model.pkl` | File model hasil training (model, preprocessor, dan nama fitur) yang dihasilkan dari notebook supervised |
 | `sk1-supervised learning/requirements.txt` | Daftar dependency Python yang dibutuhkan untuk menjalankan `app.py` |
-| `sk1-supervised learning/myenv/` | Folder virtual environment untuk studi kasus supervised |
 | `sk2-unsupervised learning/FuelConsumptionUnsupervised.ipynb` | Notebook analisis clustering (K-Means) untuk segmentasi kendaraan |
-| `sk2-unsupervised learning/venv/` | Folder virtual environment untuk studi kasus unsupervised |
+| `README.md` | Dokumentasi proyek |
 
 ## Sumber Dataset
 
@@ -102,16 +103,16 @@ Analisis ini bertujuan mengelompokkan kendaraan berdasarkan efisiensi bahan baka
 Notebook ini dirancang untuk dijalankan di **Google Colab** karena menggunakan modul `google.colab`.
 
 1. Buka notebook `sk1-supervised learning/FuelConsumptionSupervised.ipynb` di Google Colab.
-2. Siapkan file `FuelConsumption.csv` dan unggah ke sesi Colab (path yang digunakan: `/content/FuelConsumption.csv`). Bisa diunggah manual melalui panel file di Colab, atau menyesuaikan kode pembacaan data jika ingin membaca dari sumber lain.
+2. Siapkan file `Dataset/FuelConsumption.csv` dan unggah ke sesi Colab (path yang digunakan dalam notebook: `/content/FuelConsumption.csv`). Bisa diunggah manual melalui panel file di Colab, atau menyesuaikan kode pembacaan data jika ingin membaca langsung dari path lokal `Dataset/FuelConsumption.csv`.
 3. Jalankan seluruh cell secara berurutan dari atas ke bawah (Runtime > Run all).
 4. Pada bagian akhir notebook, model akan disimpan sebagai file `fuel_consumption_prediction_model.pkl` dan otomatis diunduh ke komputer melalui `files.download()`.
 5. Pindahkan file `fuel_consumption_prediction_model.pkl` hasil download ke folder `sk1-supervised learning/` (menggantikan file lama) agar `app.py` menggunakan model terbaru.
 
-Jika ingin menjalankan di lingkungan lokal (VS Code, Jupyter lokal, dll), hapus atau sesuaikan baris `from google.colab import files` dan `files.download(filename)`, karena fungsi tersebut hanya tersedia di Google Colab.
+Jika ingin menjalankan di lingkungan lokal (VS Code, Jupyter lokal, dll), hapus atau sesuaikan baris `from google.colab import files` dan `files.download(filename)`, karena fungsi tersebut hanya tersedia di Google Colab, lalu ubah path pembacaan dataset menjadi mengarah ke `../Dataset/FuelConsumption.csv`.
 
 ### 2. sk2-unsupervised learning/FuelConsumptionUnsupervised.ipynb
 
-Notebook ini dapat dijalankan baik di Google Colab maupun lingkungan Jupyter lokal, karena dataset dimuat langsung dari URL GitHub (tidak perlu upload file manual).
+Notebook ini dapat dijalankan baik di Google Colab maupun lingkungan Jupyter lokal, karena dataset dimuat langsung dari URL GitHub (tidak perlu upload file manual). Folder `Dataset/FuelConsumption.csv` yang ada di project bersifat sebagai salinan referensi dataset dan dapat digunakan sebagai alternatif jika ingin membaca dataset secara lokal.
 
 1. Buka notebook `sk2-unsupervised learning/FuelConsumptionUnsupervised.ipynb` di Google Colab atau Jupyter/VS Code lokal.
 2. Pastikan komputer terhubung ke internet karena dataset diambil langsung dari URL raw GitHub.
@@ -124,11 +125,11 @@ Notebook ini dapat dijalankan baik di Google Colab maupun lingkungan Jupyter lok
    cd "sk1-supervised learning"
    ```
 2. Pastikan file `fuel_consumption_prediction_model.pkl` (hasil dari notebook supervised) berada pada folder yang sama dengan `app.py`.
-3. (Opsional) Buat dan aktifkan virtual environment terlebih dahulu, misalnya menggunakan folder `myenv` yang sudah ada:
+3. (Opsional) Buat dan aktifkan virtual environment terlebih dahulu:
    ```
-   python -m venv myenv
-   myenv\Scripts\activate      # Windows
-   source myenv/bin/activate   # macOS/Linux
+   python -m venv venv
+   venv\Scripts\activate      # Windows
+   source venv/bin/activate   # macOS/Linux
    ```
 4. Install library yang dibutuhkan melalui `requirements.txt`:
    ```
